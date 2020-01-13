@@ -40,18 +40,21 @@ bool init()
 }
 
 int main(){
-	//TODO Main
 	bool quit = false;
 	int FRAMES_PER_SECOND = 50;
 	int xVel = 0, yVel = 0;
 	Timer fps;
 
+  cout << "Debug Message 1" << endl;
+
 	if(!init()){
 		cout << "Unknow Problem!" << endl;
 	}
 
+  cout << "Debug Message 2" << endl;
 	SDL_Event event;
 	GradiusShip gradius("f1.png",0,0);
+  cout << "Debug Message 3" << endl;
 	Stage stage("farback.gif","GradiusTitle.gif");
 	stage.setScreenWidth(1300);
 
