@@ -9,18 +9,19 @@
 #define WINSCREEN_H_
 
 #include "Screen.h"
+#include "Event.h"
 
 class WinScreen: public Screen {
 private:
 	string name_player;
 public:
-	WinScreen(string, string);
+	WinScreen();
 	string get_namePlayer();
 	void set_namePlayer(string);
 	void save_score(int);
 	void show_scores();
-	virtual ~WinScreen();
 
+	virtual ~WinScreen();
 };
 
 #endif /* WINSCREEN_H_ */

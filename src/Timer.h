@@ -17,7 +17,8 @@ private:
 	//The timer status
 	bool paused;
 	bool started;
-	public:
+
+public:
 	//Initializes variables
 	Timer();
 	//The various clock actions

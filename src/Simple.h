@@ -12,7 +12,8 @@
 
 class Simple: public Bullet {
 public:
-	Simple(string, int, int, int, int, bool);
+	Simple(int x, int y, bool ally);
+	Simple(string , int, int, bool);
 	virtual ~Simple();
 };
 

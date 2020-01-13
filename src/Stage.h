@@ -13,7 +13,7 @@
 class Stage: public Screen {
 
 public:
-	Stage(string, string);
+	Stage();
 	void options();
 	virtual ~Stage();
 };

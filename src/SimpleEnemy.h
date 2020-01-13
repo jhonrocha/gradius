@@ -12,7 +12,8 @@
 
 class SimpleEnemy: public Enemy {
 public:
-	SimpleEnemy(string,int, int, int, int);
+	SimpleEnemy();
+	SimpleEnemy(int, int);
 	virtual ~SimpleEnemy();
 	void shoot();
 	void move(int, int);

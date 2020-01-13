@@ -13,16 +13,21 @@ using namespace std;
 
 
 class Enemy: public Entity {
-protected:
-	int upDown;
-public:
+
+	public:
+	Enemy();
 	Enemy(string,int, int);
-	Enemy(string,int, int, int, int);
+	bool onAnimation(Timer);
 	int static instanceCount;
+	void Save(ofstream& savefile);
+	void Load(ifstream& savefile);
 	virtual ~Enemy();
 
 private:
 
+	bool isDead;
+	int lastAnimTime;
+	void setImg();
 	void instancesCount();
 
 };

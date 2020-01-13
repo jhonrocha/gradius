@@ -8,7 +8,6 @@
 #include "Background.h"
 
 Background::Background(string path, int xVel):Sprite(path) {
-	cout << "Background!" << endl;
 	this->xVel = xVel;
 }
 

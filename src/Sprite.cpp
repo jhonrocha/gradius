@@ -14,82 +14,108 @@ Sprite::Sprite() {
 	sprite = NULL;
 	width = 0;
 	height = 0;
+	pos = 0;
 }
 
 Sprite::Sprite(string path) {
-	//TODO Optimized image
 	sprite = IMG_Load(path.c_str());
+	animate.push_back(sprite);
 	this->x = 0;
 	this->y = 0;
 	width = sprite->w;
 	height = sprite->h;
-	cout << "Sprite!  "<< path << endl;
+	pos = 0;
 }
 
 Sprite::Sprite(string path, int x, int y) {
-	//TODO Optimized image
 	sprite = IMG_Load(path.c_str());
+	animate.push_back(sprite);
 	this->x = x;
 	this->y = y;
 	width = sprite->w;
 	height = sprite->h;
-	cout << "Sprite!  "<< path << endl;
+	pos = 0;
+}
+
+Sprite::Sprite(vector<string> paths, int x, int y){
+	vector<string>::iterator it;
+	for (it = paths.begin(); it != paths.end(); ++it) {
+		sprite = IMG_Load((*it).c_str());
+		animate.push_back(sprite);
+	}
+	this->x = x;
+	this->y = y;
+	width = sprite->w;
+	height = sprite->h;
+	pos = 0;
 }
 
 void Sprite::show(int posX, int posY, SDL_Surface* screen, SDL_Rect* clip){
 	SDL_Rect offset;
 	offset.x = posX;
 	offset.y = posY;
-	SDL_BlitSurface(sprite, clip, screen, &offset);
+	SDL_BlitSurface(animate[pos], clip, screen, &offset);
 }
 
 void Sprite::show(SDL_Surface* screen, SDL_Rect* clip){
 	SDL_Rect offset;
 	offset.x = this->x;
 	offset.y = this->y;
-	cout << "Entrou!" << endl;
-	SDL_BlitSurface(sprite, clip, screen, &offset);
-	cout << "Entrou2!" << endl;
-
+	SDL_BlitSurface(animate[pos], clip, screen, &offset);
 }
 
 void Sprite::load(string path){
-	SDL_Surface* temp;
-	temp = IMG_Load(path.c_str());
-	sprite = SDL_DisplayFormat(temp);
-	SDL_FreeSurface(temp);
+//	SDL_Surface* temp;
+//	temp = IMG_Load(path.c_str());
+	sprite = IMG_Load(path.c_str()); // SDL_DisplayFormat(temp);
+	animate.push_back(sprite);
+//	SDL_FreeSurface(temp);
+	width = sprite->w;
+	height = sprite->h;
 }
 
-void Sprite::setx(int x){
+void Sprite::load(vector<string> paths, int n) {
+	for (int i = 0; i < n-1; ++i) {
+		sprite = IMG_Load(paths[i].c_str());
+		animate.push_back(sprite);
+	}
+	width = animate[0]->w;
+	height = animate[0]->h;
+}
+void Sprite::setX(int x){
 	this->x = x;
 }
 
-void Sprite::sety(int y){
+void Sprite::setY(int y){
 	this->y = y;
 }
 
-int Sprite::getx(){
+int Sprite::getX(){
 	return x;
 }
 
-int Sprite::gety(){
+int Sprite::getY() {
 	return y;
 }
 
-void Sprite::setwidth(int width){
+void Sprite::setWidth(int width){
 	this->width = width;
 }
 
-void Sprite::setheight(int height){
+void Sprite::setHeight(int height){
 	this->height = height;
 }
 
-int Sprite::getwidth(){
+int Sprite::getWidth(){
 	return width;
 }
 
-int Sprite::getheight(){
+int Sprite::getHeight(){
 	return height;
+}
+
+void Sprite::setAnimationPos(int pos){
+	this->pos = pos;
 }
 
 Sprite::~Sprite() {

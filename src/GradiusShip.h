@@ -10,42 +10,56 @@
 
 #include"SDL/SDL.h"
 #include<iostream>
+#include"GradiusShield.h"
 #include"Entity.h"
+#include"Simple.h"
+#include"Bullet.h"
+#include"Double.h"
+#include"Timer.h"
+#include<list>
 
 using namespace std;
 
 class GradiusShip: public Entity {
 
 private:
-	int life;
 	int powerup;
 	int upgrade;
+	bool observerShield;
 	bool shieldIsOn;
-	int shieldDamage;
 	int speedLevel;
 	int speed;
+	int lastFireTime;
+	Entity* shield;
+	BulletType bulletType;
 	enum {
 		POWERUP_NONE = 0,
 		POWERUP_SPEED,
-		POWERUP_BULLET,
 		POWERUP_SHIELD,
+		POWERUP_BULLET,
 	};
+
+
 public:
-	GradiusShip(string , int, int);
-	GradiusShip(string , int, int, int, int);
+	GradiusShip(int, int);
 	virtual ~GradiusShip();
-	void setLife(int);
 	int getLife();
 	void setUpgrade(int);
 	int getUpgrade();
 	void setShield(bool);
-	bool getShield();
+	bool shieldState();
+	Entity* getShield();
 	void move(int, int, int, int);
 	void addUpgrade();
 	void activateUpgrade();
 	void upgradeSpeed();
 	void upgradeBullet();
 	void upgradeShield();
+	void destroyShield();
+	void shoot(Timer, list<Entity*>*);
+	void beDamaged(int);
+	void Save(ofstream& savefile);
+	void Load(ifstream& savefile);
 };
 
 #endif /* GRADIUSSHIP_H_ */

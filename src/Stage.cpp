@@ -7,9 +7,8 @@
 
 #include "Stage.h"
 
-Stage::Stage(string path, string title): Screen(path, title) {
-	cout << "Stage!" << endl;
-	SDL_WM_SetCaption( "Screen de Stage!", NULL );
+Stage::Stage(): Screen("Stage1.gif") {
+	SDL_WM_SetCaption( "Gradius - Stage 1", NULL );
 }
 
 Stage::~Stage() {

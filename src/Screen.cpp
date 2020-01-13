@@ -7,12 +7,11 @@
 
 #include "Screen.h"
 
-Screen::Screen(string path, string title):background(path,3),text(title){
-	cout << "Screen!" << endl;
+Screen::Screen(string path):background(path,3){
 	screen = NULL;
-	screen_width = background.getwidth();
-	screen_height = background.getheight();
-	screen = SDL_SetVideoMode( screen_width, screen_height, 32, SDL_SWSURFACE | SDL_RESIZABLE );
+	screenWidth = background.getWidth();
+	screenHeight = background.getHeight();
+	screen = SDL_SetVideoMode( screenWidth, screenHeight, 32, SDL_SWSURFACE | SDL_RESIZABLE );
 	windowed = true;
 }
 
@@ -21,47 +20,34 @@ Screen::~Screen() {
 }
 
 void Screen::setScreenWidth(int screen_width){
-	this->screen_width = screen_width;
-	screen = SDL_SetVideoMode( screen_width, screen_height, 32, SDL_SWSURFACE | SDL_RESIZABLE );
+	this->screenWidth = screen_width;
+	screen = SDL_SetVideoMode( screen_width, screenHeight, 32, SDL_SWSURFACE | SDL_RESIZABLE );
 }
 
 void Screen::setScreenHeight(int screen_height){
-	this->screen_height = screen_height;
-	screen = SDL_SetVideoMode( screen_width, screen_height, 32, SDL_SWSURFACE | SDL_RESIZABLE );
+	this->screenHeight = screen_height;
+	screen = SDL_SetVideoMode( screenWidth, screen_height, 32, SDL_SWSURFACE | SDL_RESIZABLE );
 }
 
 int Screen::getScreenWidth(){
-	return screen_width;
+	return screenWidth;
 }
 
 int Screen::getScreenHeight(){
-	return screen_height;
+	return screenHeight;
 }
 
-void Screen::show_screen(){
+void Screen::showScreen(){
 	SDL_Flip(screen);
 }
 
-void Screen::handle_events(SDL_Event event){
-    if( event.type == SDL_VIDEORESIZE ){
-    	screen = SDL_SetVideoMode( event.resize.w, event.resize.h, 32, SDL_SWSURFACE | SDL_RESIZABLE );
-
-    }
-
-    else if( ( event.type == SDL_KEYDOWN ) && ( event.key.keysym.sym == SDLK_RETURN ) ){
-    	fullscreen();
-    }
-}
-
 void Screen::fullscreen(){
-    if( windowed == true ){
-    	screen = SDL_SetVideoMode( screen_width, screen_height, 32, SDL_SWSURFACE | SDL_RESIZABLE | SDL_FULLSCREEN );
-        windowed = false;
-    }
-
-    //If the screen is fullscreen
-    else if( windowed == false ){
-    	screen = SDL_SetVideoMode( screen_width, screen_height, 32, SDL_SWSURFACE | SDL_RESIZABLE );
-        windowed = true;
-    }
+	if(windowed){
+		screen = SDL_SetVideoMode( screenWidth, screenHeight, 32, SDL_SWSURFACE | SDL_RESIZABLE | SDL_FULLSCREEN);
+		windowed = false;
+	}
+	else{
+		screen = SDL_SetVideoMode( screenWidth, screenHeight, 32, SDL_SWSURFACE | SDL_RESIZABLE | SDL_FULLSCREEN);
+		windowed = true;
+	}
 }

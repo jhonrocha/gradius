@@ -7,13 +7,24 @@
 
 #include "Bullet.h"
 
-Bullet::Bullet(string path, int coord_x, int coord_y, int x_vel, int y_vel): Entity(path, coord_x, coord_y, x_vel, y_vel) {
+Bullet::Bullet() {
+	xVel = 8;
+	yVel = 0;
+	this->ally = true;
+	type = ENTITY_BULLET;
+}
+
+Bullet::Bullet(string path, int x, int y, bool ally): Entity(path, x, y) {
 	// TODO Auto-generated constructor stub
-	ally = true;
+	xVel = 8;
+	yVel = 0;
+	this->ally = ally;
+	type = ENTITY_BULLET;
 }
 
 Bullet::~Bullet() {
 	// TODO Auto-generated destructor stub
+	amount -= 1;
 }
 
 void Bullet::setAlly(bool ally) {
@@ -24,34 +35,57 @@ bool Bullet::getAlly() {
 	return ally;
 }
 
-bool Bullet::move (int xVel, int yVel, int screenHeight, int screenWidth) {
-	this->xVel = xVel;
-	this->yVel = yVel;
+void Bullet::instanceCount() {
+	amount += 1;
+}
+
+int Bullet::getAmount() {
+	return amount;
+}
+
+
+void Bullet::move (int screenHeight, int screenWidth) {
 
 	//Move the dot left or right
 	if (ally)
 	{
-		x += this->xVel;
+		x += xVel;
 	}
+
 	else
 	{
-		x -= this->xVel;
+		x -= xVel;
 	}
 
     //If the dot went too far to the left or right
-    if( ( x < 0 ) || ( x + width > screenWidth) )
-    {
-    	return true;
-    }
     Box.x = x;
+
     //Move the dot up or down
-    y += this->yVel;
+    y += yVel;
 
     //If the dot went too far up or down
-    if( ( y < 0 ) || ( y + height > screenHeight) )
-    {
-        return true;
-    }
     Box.y = y;
-    return false;
+
 }
+
+void Bullet::Save(ofstream& savefile){
+	savefile << x << "\n";
+	savefile << y << "\n";
+	savefile << xVel << "\n";
+	savefile <<  yVel << "\n";
+	savefile << life << "\n";
+	savefile << ally << "\n";
+}
+
+void Bullet::Load(ifstream& savefile){
+	savefile >> xVel;
+	savefile >>  yVel;
+	savefile >> life;
+	savefile >> ally;
+}
+
+void Bullet::soundShoot() {
+	sound.playSound();
+}
+
+int Bullet::amount = 0;

@@ -9,11 +9,15 @@
 #define TITLE_H_
 
 #include "Screen.h"
+#include "Button.h"
 
 class Title: public Screen {
 public:
-	Title(string, string);
-	void options();
+	Event event;
+	Button NewGame, Load, Quit;
+	Title();
+	int TitleLoop();
+	void HandleOptions();
 	virtual ~Title();
 };
 

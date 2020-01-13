@@ -11,12 +11,9 @@
 #include "Bullet.h"
 
 class Double: public Bullet {
-private:
-	int count;
 public:
-	Double(string, int, int, int, int, bool);
-	void setCount(int);
-	int getCount();
+	Double(int x, int y, bool ally);
+	Double(string path, int, int, bool);
 	virtual ~Double();
 };
 

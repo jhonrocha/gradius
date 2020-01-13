@@ -7,8 +7,19 @@
 
 #include "WinScreen.h"
 
-WinScreen::WinScreen(string path, string title):Screen(path, title) {
+WinScreen::WinScreen():Screen("end_screen.png") {
+	Event event;
+	bool quit = false;
 	// TODO
+	background.show(screen);
+	showScreen();
+	while(!quit){
+		if(event.ThereIsEvent()){
+			if(event.EventType() == SDL_QUIT){
+				quit = true;
+			}
+		}
+	}
 
 }
 

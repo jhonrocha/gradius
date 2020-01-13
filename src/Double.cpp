@@ -7,18 +7,17 @@
 
 #include "Double.h"
 
-Double::Double(string path, int coord_x, int coord_y, int x_vel, int y_vel, bool ally): Bullet(path, coord_x, coord_y, x_vel, y_vel) {
+Double::Double(int x, int y, bool ally): Bullet("tiro2.png", x, y, ally){
+	xVel = 12;
+	life = 2;
+	sound.loadFile("bullet2.wav");
+	}
+
+Double::Double(string path, int x, int y, bool ally): Bullet(path, x, y, ally) {
 	// TODO Auto-generated constructor stub
-	this->ally = ally;
-	count = 0;
-}
-
-void Double::setCount(int count) {
-	this->count = count;
-}
-
-int Double::getCount() {
-	return count;
+	xVel = 12;
+	life = 2;
+	sound.loadFile("bullet2.wav");
 }
 
 Double::~Double() {

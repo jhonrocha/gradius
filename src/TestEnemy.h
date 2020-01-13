@@ -12,8 +12,8 @@
 
 class TestEnemy: public Enemy {
 public:
-	TestEnemy(string,int,int,int,int);
-	void move(int,int);
+	TestEnemy(int, int);
+	void move(int, int);
 	virtual ~TestEnemy();
 };
 

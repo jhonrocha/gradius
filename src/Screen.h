@@ -15,19 +15,17 @@ class Screen {
 
 public:
 	Background background;
-	Sprite text;
-	int screen_width, screen_height;
-	SDL_Surface* screen;
+	int screenWidth, screenHeight;
 	bool windowed;
+	SDL_Surface* screen;
 
-	Screen(string, string);
+	Screen(string backgorund_path);
 	void setScreenWidth(int);
 	void setScreenHeight(int);
 	int getScreenWidth();
 	int getScreenHeight();
-	void show_screen();
-	void handle_events(SDL_Event);
-    void fullscreen();
+	void showScreen();
+	void fullscreen();
 	virtual ~Screen();
 };
 

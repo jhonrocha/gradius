@@ -7,12 +7,27 @@
 
 #include "Simple.h"
 
-Simple::Simple(string path, int coord_x, int coord_y, int x_vel, int y_vel, bool ally): Bullet(path, coord_x, coord_y, x_vel, y_vel) {
+Simple::Simple(int x, int y, bool ally): Bullet("tiro1.png", x, y, ally) {
+	if(ally == true)
+			xVel = 12;
+		else
+			xVel = -10;
+	Uint32 colorkey = SDL_MapRGB( sprite->format, 0, 0, 0);
+	SDL_SetColorKey( sprite, SDL_SRCCOLORKEY, colorkey );
+	sound.loadFile("bullet1.wav");
+}
+
+Simple::Simple(string path, int x, int y, bool ally): Bullet(path, x, y, ally) {
 	// TODO Auto-generated constructor stub
-	this->ally = ally;
+	if(ally == true)
+			xVel = 12;
+		else
+			xVel = -10;
+	Uint32 colorkey = SDL_MapRGB( sprite->format, 0, 0, 0);
+	SDL_SetColorKey( sprite, SDL_SRCCOLORKEY, colorkey );
+	sound.loadFile("bullet1.wav");
 }
 
 Simple::~Simple() {
-	// TODO Auto-generated destructor stub
-}
 
+}

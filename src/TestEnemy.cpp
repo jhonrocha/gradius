@@ -7,9 +7,10 @@
 
 #include "TestEnemy.h"
 
-TestEnemy::TestEnemy(string path, int x, int y, int xVel, int yVel) : Enemy (path, x, y, xVel, yVel) {
+TestEnemy::TestEnemy(int x, int y) : Enemy ("testEnemy.png", x, y) {
 	// TODO Auto-generated constructor stub
-
+	xVel = 0;
+	yVel = 0;
 }
 
 TestEnemy::~TestEnemy() {

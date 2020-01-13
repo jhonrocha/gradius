@@ -14,12 +14,20 @@ class Bullet: public Entity {
 
 protected:
 	bool ally;
+	static int amount;
 public:
-	Bullet(string, int, int, int, int);
+	Bullet();
+	Bullet(string,int, int, bool);
 	virtual ~Bullet();
 	void setAlly(bool);
 	bool getAlly();
-	bool move(int, int, int, int);
+	void instanceCount();
+	int getAmount();
+	void move(int, int);
+	virtual void Save(ofstream& savefile);
+	virtual void Load(ifstream& savefile);
+	void soundShoot();
+
 };
 
 #endif /* BULLET_H_ */
